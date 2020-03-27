@@ -71,10 +71,10 @@ textarea {
   border-bottom-right-radius: 15px;
 }
 
-/* .saveBtn i:hover {
-  font-size: 20px;
-  transition: all 0.3s ease-in-out;
-} */
+.saveBtn i:hover {
+  font-size: 25px;
+  transition: all 0.5s ease-in-out;
+}
 
 i {
   height: 20px;
