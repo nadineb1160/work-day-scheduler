@@ -68,18 +68,10 @@ textarea {
   color: white;
 }
 
-.saveBtn i:hover {
+/* .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
-}
-
-input {
-  /* width max */
-  width: 100%;
-  /* height max */
-  height: 100%;
-  
-}
+} */
 
 i {
   height: 20px;
