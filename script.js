@@ -1,11 +1,14 @@
+// Once document is loaded
 $(document).ready(function () {
 
-    // Current Date
+    // Current date formatted 
     let currentDay = moment().format("dddd, MMMM Do YYYY");
 
     // Set current date 
     $("#currentDay").text(currentDay);
 
+    // Saved schedule by index - length 9
+    var savedScheduleArr = [,,,,,,,,];
 
     function createSchedule() {
 
@@ -208,18 +211,64 @@ $(document).ready(function () {
 
     $(document).on("click", ".saveBtn", function () {
         
-        // Grab text from input
-        // var btnIndex = "#" + this.id;
-
         // Text area
         var textArea = $(this).parent().children()[1];
 
         // Text area value
-        var text = textArea.children[0].value;
+        var text = textArea.children[0].value.trim();
         console.log(text);
-        
+
+        // Get index of btn
+        var index = parseInt($(this).data("index"));
+
+        // Change text in saved schedule
+        savedScheduleArr[index] = text;
+
+        localStorage.setItem("schedule", JSON.stringify(savedScheduleArr));
+    
 
     });
 
+    function getSchedule() {
+
+        // Get schedule from storage
+        var storedSchedule = localStorage.getItem("schedule");
+        
+        // If stored not null
+        if (storedSchedule) {
+
+            // set savedSchedule to stored
+            savedScheduleArr = JSON.parse(storedSchedule);
+        }
+
+        console.log(savedScheduleArr);
+
+        // Display schedule
+        displaySchedule();
+
+    }
+
+    function displaySchedule() {
+
+        // Text Area for description
+        var textAreaArr = $("textarea");
+        console.log(textAreaArr);
+
+        // Loop through saved schedule to set textarea
+        for (var i = 0; i < savedScheduleArr.length; i++) {
+
+            // Want textAreaArr[i].val() = savedScheduleArr[i]
+
+            // New text used for setting text at index
+            var newText = savedScheduleArr[i];
+
+            $(textAreaArr[i]).val(newText);
+            
+        }
+        
+        console.log(savedScheduleArr);
+    }
+
     createSchedule();
+    getSchedule();
 });
