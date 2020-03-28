@@ -32,7 +32,7 @@ THEN the saved events persist
 
 #### Dynamically Create Schedule
 
-This function generates each row dynamically by first creating the row and then creating and appending each column to the row.
+This function generates each row dynamically by first creating the row, and then creating and appending each column to the row.
 
 ```
  function createSchedule() {
@@ -59,10 +59,29 @@ This function generates each row dynamically by first creating the row and then 
 
 #### Local Storage:
 
-When the save button is clicked text is save in local to storage to be access and displayed when the page is reloaded. 
+When the save button is clicked, text is saved to local storage to be accessed and displayed when the page is reloaded. 
 
 ```
+$(document).on("click", ".saveBtn", function () {
 
+    // Text area - box
+    var textArea = $(this).parent().children()[1];
+
+    // Text area - value
+    var text = textArea.children[0].value.trim();
+
+    // Get index of btn
+    var index = parseInt($(this).data("index"));
+
+    // Change text in saved schedule
+    savedScheduleArr[index] = text;
+
+    // Store saved schedule to local storage
+    localStorage.setItem("schedule", JSON.stringify(savedScheduleArr));
+
+    // Change icon color to black
+    $(this).attr("style", "color: black");
+});
 ```
 
 The following animation demonstrates the application functionality:

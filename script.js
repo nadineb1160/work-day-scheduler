@@ -214,10 +214,10 @@ $(document).ready(function () {
 
     $(document).on("click", ".saveBtn", function () {
 
-        // Text area
+        // Text area - box
         var textArea = $(this).parent().children()[1];
 
-        // Text area value
+        // Text area - value
         var text = textArea.children[0].value.trim();
 
         // Get index of btn
@@ -229,6 +229,7 @@ $(document).ready(function () {
         // Store saved schedule to local storage
         localStorage.setItem("schedule", JSON.stringify(savedScheduleArr));
 
+        // Change icon color to black
         $(this).attr("style", "color: black");
     });
 
