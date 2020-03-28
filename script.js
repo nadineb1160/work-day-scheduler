@@ -153,8 +153,10 @@ $(document).ready(function () {
 
         // Converts index 0 -> hour 9:00AM
         var time = index + 9;
+
         // Hour of day - 12 hour
         var hour;
+
         // Time of day - AM or PM
         var timeOfDay;
 
@@ -267,6 +269,7 @@ $(document).ready(function () {
 
     // Create schedule elements
     createSchedule();
+    
     // Get schedule text blocks from storage
     getSchedule();
 });
