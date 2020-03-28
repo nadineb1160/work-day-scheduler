@@ -227,7 +227,7 @@ $(document).ready(function () {
         // Store saved schedule to local storage
         localStorage.setItem("schedule", JSON.stringify(savedScheduleArr));
 
-
+        $(this).attr("style", "color: black");
     });
 
     function getSchedule() {
@@ -241,8 +241,6 @@ $(document).ready(function () {
             // Set savedSchedule to stored
             savedScheduleArr = JSON.parse(storedSchedule);
         }
-
-        console.log(savedScheduleArr);
 
         // Display schedule to screen
         displaySchedule();
