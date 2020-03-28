@@ -27,8 +27,10 @@ THEN the text for that event is saved in local storage
 IF I refresh the page
 THEN the saved events persist
 ```
+#
+The following animation demonstrates the application functionality:
 
-![schedule example](./Assets/schedule.png)
+![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
 
 #### Dynamically Create Schedule
 
@@ -79,14 +81,8 @@ $(document).on("click", ".saveBtn", function () {
     // Store saved schedule to local storage
     localStorage.setItem("schedule", JSON.stringify(savedScheduleArr));
 
-    // Change icon color to black
-    $(this).attr("style", "color: black");
 });
 ```
-
-The following animation demonstrates the application functionality:
-
-![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
 
 ## Technologies Used
 - HTML - used to create elements on the DOM

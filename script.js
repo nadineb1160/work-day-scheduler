@@ -229,8 +229,6 @@ $(document).ready(function () {
         // Store saved schedule to local storage
         localStorage.setItem("schedule", JSON.stringify(savedScheduleArr));
 
-        // Change icon color to black
-        $(this).attr("style", "color: black");
     });
 
     function getSchedule() {
