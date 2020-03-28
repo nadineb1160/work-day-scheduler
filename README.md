@@ -28,9 +28,8 @@ IF I refresh the page
 THEN the saved events persist
 ```
 #
-The following animation demonstrates the application functionality:
 
-![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
+![schedule example](./Assets/schedule.png)
 
 #### Dynamically Create Schedule
 
@@ -83,6 +82,10 @@ $(document).on("click", ".saveBtn", function () {
 
 });
 ```
+
+The following animation demonstrates the application functionality:
+
+![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
 
 ## Technologies Used
 - HTML - used to create elements on the DOM
