@@ -8,7 +8,7 @@ $(document).ready(function () {
     $("#currentDay").text(currentDay);
 
     // Saved schedule by index - length 9
-    var savedScheduleArr = [,,,,,,,,];
+    var savedScheduleArr = [, , , , , , , ,];
 
     function createSchedule() {
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     function addRow(index) {
 
-        // Add new div
+        // Add new div for row
         var newRow = $("<div>");
 
         // Check time of day for tense
@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     function addTimeCol(index) {
 
-        // *** NEW DIV ***
+        // Add time column
         var newTimeCol = $("<div>");
 
         // Add classes
@@ -63,13 +63,13 @@ $(document).ready(function () {
         // Add data-index index
         newTimeCol.attr("data-index", index);
 
-        // String # with index
+        // String # with index - row id
         indexIdStr = "#" + index;
 
         // Append to row with index
         $(indexIdStr).append(newTimeCol);
 
-        // *** NEW P ***
+        // Add p for time
         var newTime = $("<p>");
 
         // Add class
@@ -88,80 +88,82 @@ $(document).ready(function () {
 
     function addInputCol(index) {
 
-        // Add new div
-        var newCol = $("<div>");
+        // Add new input column
+        var newInputCol = $("<div>");
 
         // Add classes
-        newCol.addClass("col-sm-8");
-        //newCol.addClass("description");
+        newInputCol.addClass("col-sm-8 description");
 
         // Add data-index index
-        newCol.attr("data-index", index);
+        newInputCol.attr("data-index", index);
 
-        // String # with index
+        // String # with index - row id
         indexIdStr = "#" + index;
 
         // Append to row with index
-        $(indexIdStr).append(newCol);
+        $(indexIdStr).append(newInputCol);
 
         // Add new input
         var newInput = $("<textarea>");
-        newInput.addClass("description");
-        newInput.addClass("textarea");
+
+        // Add classes
+        newInput.addClass("description textarea");
 
         // Add data-index index
         newInput.attr("data-index", index);
 
         // Append to row with index
-        $(newCol).append(newInput);
+        $(newInputCol).append(newInput);
 
     }
 
     function addSaveCol(index) {
 
-        // Add new div
-        var newSave = $("<div>");
+        // Add new save column
+        var newSaveCol = $("<div>");
 
         // Add classes
-        newSave.addClass("col-sm-2");
-        newSave.addClass("saveBtn");
+        newSaveCol.addClass("col-sm-2");
+        newSaveCol.addClass("saveBtn");
 
         // Add data-index index
-        newSave.attr("data-index", index);
+        newSaveCol.attr("data-index", index);
 
-        // String # with index
+        // String # with index - row id
         indexIdStr = "#" + index;
 
         // Append to row with index
-        $(indexIdStr).append(newSave);
+        $(indexIdStr).append(newSaveCol);
 
-        // Add new div
+        // Add new icon
         var newIcon = $("<i>");
 
         // Add classes
         newIcon.addClass("icon fas fa-save");
-    
+
         // Add data-index index
         newIcon.attr("data-index", index);
 
         // Append to row with index
-        $(newSave).append(newIcon);
+        $(newSaveCol).append(newIcon);
 
     }
 
     function getTimeOfIndex(index) {
 
-        // index 0 -> 9:00Am
+        // Converts index 0 -> hour 9:00AM
         var time = index + 9;
+        // Hour of day - 12 hour
         var hour;
+        // Time of day - AM or PM
         var timeOfDay;
 
-        // Add 0 if less than 10
         if (time < 10) {
-
+            // Add 0 if less than 10, ex. 4 -> 04
             hour = "0" + time;
         }
         else {
+            // Convert to string
             hour = time.toString();
         }
 
@@ -174,14 +176,14 @@ $(document).ready(function () {
         else {
 
             if (hour != 12) {
-                // 12 hour clock
+                // Change to 12 hour time
                 hour -= 12;
             }
 
             timeOfDay = "PM";
         }
+        // return formatted time of day
         return hour + ":00" + timeOfDay;
-
     }
 
 
@@ -190,33 +192,31 @@ $(document).ready(function () {
         // 24-hour
         var rowTime = index + 9;;
 
-        // Time of day - 24-hour
+        // Time of day - 24-hour formatted
         var timeOfDay = parseInt(moment().format("H"));
 
         // Add class to row while being built
+        // Past time blocks
         if (rowTime < timeOfDay) {
-
             return "past";
         }
-
+        // Future time blocks
         else if (rowTime > timeOfDay) {
-
             return "future";
         }
+        // Present time blocks
         else {
-
             return "present";
         }
     }
 
     $(document).on("click", ".saveBtn", function () {
-        
+
         // Text area
         var textArea = $(this).parent().children()[1];
 
         // Text area value
         var text = textArea.children[0].value.trim();
-        console.log(text);
 
         // Get index of btn
         var index = parseInt($(this).data("index"));
@@ -224,8 +224,9 @@ $(document).ready(function () {
         // Change text in saved schedule
         savedScheduleArr[index] = text;
 
+        // Store saved schedule to local storage
         localStorage.setItem("schedule", JSON.stringify(savedScheduleArr));
-    
+
 
     });
 
@@ -233,17 +234,17 @@ $(document).ready(function () {
 
         // Get schedule from storage
         var storedSchedule = localStorage.getItem("schedule");
-        
+
         // If stored not null
         if (storedSchedule) {
 
-            // set savedSchedule to stored
+            // Set savedSchedule to stored
             savedScheduleArr = JSON.parse(storedSchedule);
         }
 
         console.log(savedScheduleArr);
 
-        // Display schedule
+        // Display schedule to screen
         displaySchedule();
 
     }
@@ -252,23 +253,22 @@ $(document).ready(function () {
 
         // Text Area for description
         var textAreaArr = $("textarea");
-        console.log(textAreaArr);
 
         // Loop through saved schedule to set textarea
         for (var i = 0; i < savedScheduleArr.length; i++) {
 
-            // Want textAreaArr[i].val() = savedScheduleArr[i]
-
             // New text used for setting text at index
             var newText = savedScheduleArr[i];
 
+            // Select and set text to newText
             $(textAreaArr[i]).val(newText);
-            
+
         }
-        
-        console.log(savedScheduleArr);
+
     }
 
+    // Create schedule elements
     createSchedule();
+    // Get schedule text blocks from storage
     getSchedule();
 });
